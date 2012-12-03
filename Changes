@@ -1,5 +1,11 @@
 Revision history for perl module App::PrereqGrapher
 
+0.02 2012-12-03
+    - forgot to include the following in my dist.ini:
+        [PkgVersion]
+        [AutoPrereqs]
+      I'm such a Dist::Zilla n00b
+
 0.01 2012-12-02
     - initial release
 
