@@ -2,6 +2,7 @@ Revision history for perl module App::PrereqGrapher
 
 0.06 2012-12-09
     - Added -timeout option to prereq-grapher and timeout param to App::PrereqGrapher
+    - Made a change to hopefully address some Win32 failures from CPAN Testers
 
 0.05 2012-12-05
     - Added depth option, so you can limit the depth of dep graph generated
