@@ -49,6 +49,11 @@ has depth => (
     isa => sub { croak "depth must be an integer\n" unless $_[0] =~ /^\d$/; },
 );
 
+has timeout => (
+    is => 'ro',
+    isa => sub { croak "timeout must be an integer\n" unless $_[0] =~ /^\d$/; },
+);
+
 sub new_with_options
 {
     my $class    = shift;
@@ -66,6 +71,7 @@ sub parse_options
 
     GetOptions(
         'd|depth=i'           => \$options{'depth'},
+        't|timeout=i'         => \$options{'timeout'},
         'o|output-file=s'     => \$options{'output_file'},
         'nc|no-core'          => \$options{'no_core'},
         'nrc|no-recurse-core' => \$options{'no_recurse_core'},
@@ -109,6 +115,7 @@ sub generate_graph
 
     $scanner = Perl::PrereqScanner->new;
     $graph   = Graph::Easy->new();
+    $graph->timeout($self->timeout);
 
     @depth{@inputs} = map { 0 } @inputs;
 
@@ -243,6 +250,12 @@ of perl being used.
 When a core module is used, include it in the dependency graph,
 but don't show any of I<its> dependencies.
 
+=item timeout
+
+Specifies the timeout for Graph::Easy when its laying out the graph.
+This is mainly relevant for formats like SVG and HTML, where the graph
+layout is done in Perl. Defaults to 5 seconds.
+
 =item verbose
 
 Display verbose logging as the grapher runs.
@@ -306,7 +319,7 @@ for example Perl::Tidy cannot be graphed,
 and if you try and graph a file that use's Perl::Tidy,
 then it just won't appear in the graph.
 
-If a class isn't defined in it's own file,
+If a class isn't defined in its own file,
 then App::PrereqGrapher won't find it;
 for example Tie::StdHash is defined inside Tie::Hash.
 By default these are silently ignored,

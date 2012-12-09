@@ -18,16 +18,17 @@ prereq-grapher - generate dependency graph for perl module or source
  prereq-grapher [options] Foo::Bar .. Foo::Baz
 
  Options:
-   -o <file>  The file to write the graph into
-   -d <int>   Stop recursing at the specified depth
-   -nc        Don't include core modules in dependency graph
-   -nrc       Show core modules, but not their dependencies
-   -dot       Generate graph in dot format (used by GraphViz)
-   -svg       Generate graph as Scalable Vector Graphics
-   -html      Generate graph as HTML
-   -gml       Generate graph as GraphML
-   -vcg       Generate graph in VCG format
-   -verbose   Display verbose messages as we run
+   -o <file>    The file to write the graph into
+   -d <int>     Stop recursing at the specified depth
+   -t <seconds> Timeout for when generating SVG or HTML output
+   -nc          Don't include core modules in dependency graph
+   -nrc         Show core modules, but not their dependencies
+   -dot         Generate graph in dot format (used by GraphViz)
+   -svg         Generate graph as Scalable Vector Graphics
+   -html        Generate graph as HTML
+   -gml         Generate graph as GraphML
+   -vcg         Generate graph in VCG format
+   -verbose     Display verbose messages as we run
 
 =head1 DESCRIPTION
 
@@ -76,6 +77,11 @@ called C<dependencies>, and the extension will indicate the format
 =item B<-d N> | B<-depth N>
 
 Generate the dependency graph to a depth of no more than N links.
+
+=item B<-r T> | B<-timeout T>
+
+Specifies the timeout that should be passed to Graph::Easy when
+generating the output graph. Mainly relevant for SVG and HTML formats.
 
 =item B<-nc> | B<-no-core>
 
