@@ -188,7 +188,7 @@ App::PrereqGrapher - generate dependency graph using Perl::PrereqScanner
                           format => 'dot',
                          no_core => 0,
                  no_recurse_core => 1,
-                     output_file => 'prereqs.dot'
+                     output_file => 'prereqs.dot',
                          verbose => 0,
                 );
   my $grapher = App::PrereqGrapher->new( %options );
