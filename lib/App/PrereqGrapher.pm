@@ -2,6 +2,7 @@ package App::PrereqGrapher;
 #
 # ABSTRACT: generate dependency graph using Perl::PrereqScanner
 #
+use 5.006;
 use strict;
 use warnings;
 
