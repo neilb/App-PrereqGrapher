@@ -1,5 +1,9 @@
 Revision history for perl module App::PrereqGrapher
 
+0.08 2014-02-01
+    - After creating files in testsuite, chmod 0600 them before unlinking.
+      Hopefully that will fix some test failures on Win32...
+
 0.07 2014-01-30
     - Specified min perl version 5.6.0
 

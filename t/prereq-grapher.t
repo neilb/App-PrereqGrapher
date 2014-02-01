@@ -14,4 +14,5 @@ my $GRAPHER = catfile( $FindBin::Bin, updir(), qw(bin prereq-grapher) );
 
 system("'$PERL' '$GRAPHER' -o dependencies.dot -dot Module::Path");
 ok(compare('dependencies.dot', 'module-path.dot'), 'Check graph for Module::Path');
+chmod(0600, 'dependencies.dot');
 ok(unlink('dependencies.dot'), "remove graph after running test");
