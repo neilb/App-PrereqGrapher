@@ -1,5 +1,9 @@
 Revision history for perl module App::PrereqGrapher
 
+0.09 2014-02-01
+    - Changed the test filenames to fit in 8.3, in case that's
+      why my Win32 tests are failing...
+
 0.08 2014-02-01
     - After creating files in testsuite, chmod 0600 them before unlinking.
       Hopefully that will fix some test failures on Win32...
