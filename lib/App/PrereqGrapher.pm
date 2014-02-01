@@ -46,12 +46,12 @@ has verbose => (
 
 has depth => (
     is => 'ro',
-    isa => sub { croak "depth must be an integer\n" unless $_[0] =~ /^\d$/; },
+    isa => sub { croak "depth must be an integer\n" unless $_[0] =~ /^\d+$/; },
 );
 
 has timeout => (
     is => 'ro',
-    isa => sub { croak "timeout must be an integer\n" unless $_[0] =~ /^\d$/; },
+    isa => sub { croak "timeout must be an integer\n" unless $_[0] =~ /^\d+$/; },
 );
 
 sub new_with_options
