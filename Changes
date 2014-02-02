@@ -1,5 +1,9 @@
 Revision history for perl module App::PrereqGrapher
 
+0.10 2014-02-02
+    - Now used different filenames for each test, maybe that's
+      causing the fails ...
+
 0.09 2014-02-01
     - Changed the test filenames to fit in 8.3, in case that's
       why my Win32 tests are failing...
