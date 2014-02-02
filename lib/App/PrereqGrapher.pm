@@ -161,7 +161,7 @@ sub generate_graph
         croak "Failed to write $filename: $!\n";
     print $fh $formats{$self->format}->($graph);
     close($fh);
-    print STDERR "$module_count modules processed. Graph written to $filename\n";
+    print STDERR "$module_count modules processed. Graph written to $filename\n" if $self->verbose;
 }
 
 sub is_core

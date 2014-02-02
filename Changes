@@ -1,6 +1,7 @@
 Revision history for perl module App::PrereqGrapher
 
 0.10 2014-02-02
+    - Don't write to STDERR unless verbose option was given
     - Now used different filenames for each test, maybe that's
       causing the fails ...
 
