@@ -13,6 +13,7 @@ use Getopt::Long qw/:config no_ignore_case/;
 use Graph::Easy;
 use Module::Path qw(module_path);
 use Module::CoreList;
+use List::Util qw(first);
 
 my %formats =
 (
@@ -39,6 +40,11 @@ has no_core => (
 
 has no_recurse_core => (
     is => 'ro',
+);
+
+has ignore_list => (
+    is => 'ro',
+    isa => sub { croak "ignore_list must be an arrayref of regexps" unless ref($_[0]) eq 'ARRAY'; },
 );
 
 has verbose => (
@@ -69,6 +75,7 @@ sub parse_options
     my $class = shift;
     my %options;
     my %format;
+    my @ignores;
 
     GetOptions(
         'd|depth=i'           => \$options{'depth'},
@@ -76,6 +83,7 @@ sub parse_options
         'o|output-file=s'     => \$options{'output_file'},
         'nc|no-core'          => \$options{'no_core'},
         'nrc|no-recurse-core' => \$options{'no_recurse_core'},
+        'ignore=s'            => \@ignores,
         'v|verbose'           => \$options{'verbose'},
         'dot'                 => \$format{'dot'},
         'svg'                 => \$format{'svg'},
@@ -101,6 +109,10 @@ sub parse_options
         delete $options{$_} unless defined $options{$_};
     }
     $options{format} = (keys %format)[0];
+
+    foreach my $ignore (@ignores) {
+      $options{ignore_list} = [map { qr/$_/ } @ignores];
+    }
 
     return %options;
 }
@@ -146,6 +158,8 @@ sub generate_graph
             }
             if ($self->no_core && is_core($dep)) {
                 # don't include core modules
+            } elsif ( $self->ignore_list && first { $dep =~ $_ } @{$self->ignore_list} ) {
+                # don't include ignored modules
             } elsif ($dep eq 'perl') {
                 $graph->add_edge($module, "perl $depsref->{perl}");
             } else {
@@ -191,6 +205,7 @@ App::PrereqGrapher - generate dependency graph using Perl::PrereqScanner
                  no_recurse_core => 1,
                      output_file => 'prereqs.dot',
                          verbose => 0,
+                     ignore_list => [qr/^Moose::/],
                 );
   my $grapher = App::PrereqGrapher->new( %options );
   
@@ -262,6 +277,15 @@ layout is done in Perl. Defaults to 5 seconds.
 Display verbose logging as the grapher runs.
 Currently this will just tell you if a module was use'd or require'd,
 but couldn't be found locally.
+
+=item ignore_list
+
+If you provide an arrayref of regexps, these will be used to match files
+that should be ignored.
+e.g.
+    -ignore "^Moose::"
+
+will make all Moose modules vanish from the generated output.    
 
 =back
 

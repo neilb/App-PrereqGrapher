@@ -18,17 +18,18 @@ prereq-grapher - generate dependency graph for perl module or source
  prereq-grapher [options] Foo::Bar .. Foo::Baz
 
  Options:
-   -o <file>    The file to write the graph into
-   -d <int>     Stop recursing at the specified depth
-   -t <seconds> Timeout for when generating SVG or HTML output
-   -nc          Don't include core modules in dependency graph
-   -nrc         Show core modules, but not their dependencies
-   -dot         Generate graph in dot format (used by GraphViz)
-   -svg         Generate graph as Scalable Vector Graphics
-   -html        Generate graph as HTML
-   -gml         Generate graph as GraphML
-   -vcg         Generate graph in VCG format
-   -verbose     Display verbose messages as we run
+   -o <file>        The file to write the graph into
+   -d <int>         Stop recursing at the specified depth
+   -t <seconds>     Timeout for when generating SVG or HTML output
+   -nc              Don't include core modules in dependency graph
+   -nrc             Show core modules, but not their dependencies
+   -dot             Generate graph in dot format (used by GraphViz)
+   -svg             Generate graph as Scalable Vector Graphics
+   -html            Generate graph as HTML
+   -gml             Generate graph as GraphML
+   -vcg             Generate graph in VCG format
+   -verbose         Display verbose messages as we run
+   -ignore <expr>   Ignore modules matching this regexp. Multiple -ignore lines can be supplied.
 
 =head1 DESCRIPTION
 
@@ -63,6 +64,12 @@ using the B<-depth> (or B<-d>) option:
   % prereq-grapher -depth 2 App::PrereqGrapher
   10 modules processed. Graph written to dependencies.dot
 
+Sometimes you might not care about certain modules. These can be ignored by
+providing multiple -ignore lines:
+
+  % prereq-grapher -ignore "^Moose::" --ignore "^Moo::" App::PrereqGrapher
+  243 modules processed. Graph written to dependencies.dot
+
 =head1 OPTIONS
 
 =over 4
@@ -90,6 +97,14 @@ Don't include any core dependencies in the generated dependency graph.
 =item B<-nrc> | B<-no-recurse-core>
 
 Include core modules in the output, but don't include any of their dependencies.
+
+=item B<-ignore>
+
+Provide a regexp for modules to ignore.
+Multiple -ignore can be supplied.
+
+e.g.
+    -ignore "^Moose::"
 
 =item B<-dot>
 
