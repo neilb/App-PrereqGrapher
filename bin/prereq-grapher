@@ -29,6 +29,7 @@ prereq-grapher - generate dependency graph for perl module or source
    -gml         Generate graph as GraphML
    -vcg         Generate graph in VCG format
    -verbose     Display verbose messages as we run
+   -h --help    This help
 
 =head1 DESCRIPTION
 
