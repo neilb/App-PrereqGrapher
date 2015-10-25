@@ -71,6 +71,7 @@ sub parse_options
     my %format;
 
     GetOptions(
+        'h|help'              => \$options{'help'},
         'd|depth=i'           => \$options{'depth'},
         't|timeout=i'         => \$options{'timeout'},
         'o|output-file=s'     => \$options{'output_file'},
@@ -83,6 +84,7 @@ sub parse_options
         'vcg'                 => \$format{'vcg'},
         'html'                => \$format{'html'},
     ) || croak "Can't get options.";
+    usage() if $options{'help'};
 
     foreach my $format (keys %formats) {
         delete $format{$format} unless $format{$format};
@@ -173,6 +175,13 @@ sub is_core
     return 0 unless $version >= $first_release;
     return 1 if !defined(my $final_release = Module::CoreList::removed_from($module));
     return $version <= $final_release;
+}
+
+sub usage
+{
+    require Pod::Usage;
+    Pod::Usage::pod2usage();
+    exit;
 }
 
 1;
