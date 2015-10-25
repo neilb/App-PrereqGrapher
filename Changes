@@ -2,6 +2,7 @@ Revision history for perl module App::PrereqGrapher
 
 0.12 2015-10-25 NEILB
     - Added --help option to prereq-grapher script. Thanks to SZABGAB.
+    - Include META.json in releases, and tag and push to github
 
 0.11 2014-02-05
     - timeout/depth could only be single-digit numbers
