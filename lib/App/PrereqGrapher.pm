@@ -374,7 +374,7 @@ to get dependency information.
 
 =head1 REPOSITORY
 
-L<https://github.com/neilbowers/App-PrereqGrapher>
+L<https://github.com/neilb/App-PrereqGrapher>
 
 =head1 AUTHOR
 
