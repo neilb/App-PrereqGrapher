@@ -95,6 +95,15 @@ sub parse_options
         print "FORMAT: ", join(', ', keys %format), "\n";
         croak "you can only specify at most ONE output format (default is 'dot')";
     }
+    if ($format{svg}) {
+        eval {
+            require Graph::Easy::As_svg;
+        };
+        if ($@) {
+            croak "You don't have Graph::Easy::As_svg installed, ",
+                  "so I can't generate SVG";
+        }
+    }
     $format{dot} = 1 unless keys %format == 1;
 
     if ($options{no_core} && $options{no_recurse_core}) {
@@ -370,6 +379,8 @@ L<prereq-grapher>. It has its own documentation.
 
 This module uses L<Perl::PrereqScanner> to parse the source code,
 and L<Graph::Easy> to generate and save the dependency graph.
+
+If you want to generate SVG graphs, you need to have L<Graph::Easy::As_svg> installed.
 
 L<http://neilb.org/reviews/dependencies.html>: a review of CPAN modules that can be used
 to get dependency information.

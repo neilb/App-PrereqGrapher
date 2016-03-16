@@ -1,5 +1,10 @@
 Revision history for perl module App::PrereqGrapher
 
+0.13 2016-03-16 NEILB
+    - Better error message if you try to generate SVG format graph,
+      but don't have Graph::Easy::As_svg installed. Also mentioned this
+      in SEE ALSO. Thanks to Bartosz Jakubski.
+
 0.12 2015-10-25 NEILB
     - Added --help option to prereq-grapher script. Thanks to SZABGAB.
     - Include META.json in releases, and tag and push to github
