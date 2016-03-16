@@ -204,7 +204,7 @@ App::PrereqGrapher - generate dependency graph using Perl::PrereqScanner
 =head1 SYNOPSIS
 
   use App::PrereqGrapher;
-  
+
   my %options = (
                           format => 'dot',
                          no_core => 0,
@@ -213,7 +213,7 @@ App::PrereqGrapher - generate dependency graph using Perl::PrereqScanner
                          verbose => 0,
                 );
   my $grapher = App::PrereqGrapher->new( %options );
-  
+
   $grapher->generate_graph('Module::Path');
 
 =head1 DESCRIPTION
