@@ -1,5 +1,11 @@
 Revision history for perl module App::PrereqGrapher
 
+0.14 2016-03-22 NEILB
+    - One of the tests has always been failing on Windows, because it was
+      failing to delete a test file that it created. Have made this not
+      result in test failure, but also output more info, so I can try and
+      work out why the unlink fails.
+
 0.13 2016-03-16 NEILB
     - Better error message if you try to generate SVG format graph,
       but don't have Graph::Easy::As_svg installed. Also mentioned this
