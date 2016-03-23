@@ -8,7 +8,6 @@ use Test::More;
 use FindBin 0.05;
 use File::Spec::Functions;
 use Devel::FindPerl qw(find_perl_interpreter);
-use File::Compare;
 
 {
     my $test_file = 'example3.dot';

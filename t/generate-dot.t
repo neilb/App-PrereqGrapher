@@ -3,11 +3,10 @@
 use strict;
 use warnings;
 
+use App::PrereqGrapher;
 use Test::More;
 use File::Compare;
 
-use App::PrereqGrapher;
-use Data::Dumper;
 my $grapher;
 
 { # no depth param
@@ -56,7 +55,7 @@ my $grapher;
     chmod(0600, $test_file);
     ok(unlink($test_file), "remove graph after running test");
 }
-{ # no depth param
+{ # depth => 2
 
     my $test_file = 'example2.dot';
     my $base_file = 't/base/module-path-depth-2.dot';
